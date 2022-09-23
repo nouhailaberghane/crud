@@ -3,8 +3,12 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import React, {useState, useEffect} from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import database from "../../firebase";
+import database, {db } from "../../firebase";
 import { toast } from "react-toastify";
+
+import { addDoc, collection, doc, setDoc } from "firebase/firestore"; 
+
+
 
 const initialState = {
   nom: "",
@@ -28,19 +32,28 @@ const handleInputChange = (e) => {
       setState({ ...state, [name]: value});
 
 } ;
-const handleSubmit = (e) => {
+const  handleSubmit  = async (e) => {
+  const eployeRef = collection(db, "employe");
 e.preventDefault();
 if (!nom || !prenom || !email || !cin || !adresse || !numero){
   toast.error("entrez tous les élèments");
 }else {
-  database.child("employe").push(state, (err) =>{
+  addDoc(collection(db, "employe"),{
+    nom: state.nom,
+    prenom:state.prenom,
+    email: state.email,
+    cin: state.cin,   
+    addresse:state.adresse,
+    numero: state.numero
+  });
+/*  database.collection("employe").push(state, (err) =>{
     if (err){
       toast.error(err);
     }else {
       toast.success("employé enregistré avec succé");
     }
-  });
-    setTimeout(() => history.push("/users"), 500);
+  });*/
+   // setTimeout(() => history.push("/users"), 500);
 }
 } ;
 
