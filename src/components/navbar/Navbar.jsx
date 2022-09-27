@@ -6,7 +6,7 @@ const Navbar =() =>{
       const location = useLocation();
 
       useEffect(()=> {
-          if ( location.pathname === "/users"){
+          if ( location.pathname === "/empolye"){
                setActiveTab("List");
           } else if (location.pathname === "/nouveau"){
                setActiveTab("nouveau");
@@ -19,7 +19,7 @@ const Navbar =() =>{
     <div className="header">
       <p className="logo" >EMPLOYES</p>
       <div className="header-right"></div>
-      <Link to = "/users">
+      <Link to = "/employe">
            <p className= {`${activeTab === "List" ? "active" : ""}`} onClick = {() => setActiveTab("List")}>
             Liste
            </p>

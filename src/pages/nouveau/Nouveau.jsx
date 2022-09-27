@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import database, {db } from "../../firebase";
 import { toast } from "react-toastify";
 
-import { addDoc, collection, doc, setDoc } from "firebase/firestore"; 
+import { addDoc, collection,setDoc  } from "firebase/firestore"; 
 
 
 
@@ -32,7 +32,20 @@ const handleInputChange = (e) => {
       setState({ ...state, [name]: value});
 
 } ;
-const  handleSubmit  = async (e) => {
+/*const [newNom, setNewNom] = useState("");
+const [newPrenom, setNewPrenom] = useState("");
+const [newEmail, setNewEmail] = useState("");
+const [newCin, setNewCin] = useState("");
+const [newAdresse, setNewAdresse] = useState("");
+const [newNumero, setNewNumero] = useState(0);
+
+const handleSubmit = async (e) => {
+  await addDoc(collection(db, "employe"), { nom: newNom, prenom: newPrenom, email: newEmail, cin: newCin, 
+    adresse: newAdresse, numero: newNumero
+  });
+
+}; */
+ const  handleSubmit  = async (e) => {
   const eployeRef = collection(db, "employe");
 e.preventDefault();
 if (!nom || !prenom || !email || !cin || !adresse || !numero){
@@ -43,9 +56,11 @@ if (!nom || !prenom || !email || !cin || !adresse || !numero){
     prenom:state.prenom,
     email: state.email,
     cin: state.cin,   
-    addresse:state.adresse,
-    numero: state.numero
+    adresse:state.adresse,
+    numero: state.numero,
+    
   });
+ 
 /*  database.collection("employe").push(state, (err) =>{
     if (err){
       toast.error(err);
@@ -54,6 +69,8 @@ if (!nom || !prenom || !email || !cin || !adresse || !numero){
     }
   });*/
    // setTimeout(() => history.push("/users"), 500);
+   toast.success("employé enregistré avec succé");
+   
 }
 } ;
 

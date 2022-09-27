@@ -23,7 +23,7 @@ function App() {
   };
 
   return (
-    <div className={darkMode ? "app dark" : "app"}>
+    <div >
       
       <ToastContainer position="top-center"/>
       <BrowserRouter>
@@ -39,7 +39,7 @@ function App() {
               }
             />
            
-          <Route path="users">
+          <Route path="employe">
             <Route
                 index
                 element={
@@ -49,33 +49,16 @@ function App() {
                 }
               />
              
-          
-              <Route
-                path=":userId"
-                element={
-                  <RequireAuth>
-                    <Single />
-                  </RequireAuth>
-                }
-              />
-              <Route
-                path="new"
-                element={
-                  <RequireAuth>
-                    <New inputs={userInputs} title="Add New User" />
-                  </RequireAuth>
-                }
-              />
             </Route>
-            <Route path="nouveau">
-              <Route
-                index
+            <Route path="nouveau"
                 element={
                   <RequireAuth>
-                    <Nouveau />
+                   <Nouveau />
                   </RequireAuth>
                 }
               />
+            <Route path="nouvea">
+              
               <Route
                 path=":productId"
                 element={
@@ -84,18 +67,9 @@ function App() {
                   </RequireAuth>
                 }
               />
-              <Route
-                path="new"
-                element={
-                  <RequireAuth>
-                    <New inputs={productInputs} title="Add New Product" />
-                  </RequireAuth>
-                }
-              />
-              
               </Route>
             </Route>
-          
+            <Route path="/update/:id"  element= {<Nouveau/>}/>
           
         </Routes>
       </BrowserRouter>
