@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import database, {db } from "../../firebase";
 import { toast } from "react-toastify";
 
-import { addDoc, collection,setDoc  } from "firebase/firestore"; 
+import { addDoc, collection,getDoc, doc , updateDoc } from "firebase/firestore"; 
 
 
 
@@ -26,32 +26,52 @@ const Nouveau = () => {
 const [state, setState] = useState(initialState);
 const [data, setData] = useState({});
 const {nom, prenom ,email,cin,adresse,numero}= state;
-const history = useNavigate();
+const navigate = useNavigate();
 const handleInputChange = (e) => {
       const {name, value} = e.target;
       setState({ ...state, [name]: value});
+    };
+const { id } = useParams();
 
-} ;
-/*const [newNom, setNewNom] = useState("");
-const [newPrenom, setNewPrenom] = useState("");
-const [newEmail, setNewEmail] = useState("");
-const [newCin, setNewCin] = useState("");
-const [newAdresse, setNewAdresse] = useState("");
-const [newNumero, setNewNumero] = useState(0);
+useEffect(() => {
+  id && getSingleEmploye();
+},id) ;
 
-const handleSubmit = async (e) => {
-  await addDoc(collection(db, "employe"), { nom: newNom, prenom: newPrenom, email: newEmail, cin: newCin, 
-    adresse: newAdresse, numero: newNumero
-  });
+const getSingleEmploye = async () => {
+  const docRef = doc(db, "employe" , id);
+  const snapshot = await getDoc(docRef);
+  if (snapshot.exists()){
+    setState({ ...snapshot.data()});
+  }};
 
-}; */
+
+
+
+
  const  handleSubmit  = async (e) => {
-  const eployeRef = collection(db, "employe");
 e.preventDefault();
-if (!nom || !prenom || !email || !cin || !adresse || !numero){
-  toast.error("entrez tous les élèments");
-}else {
-  addDoc(collection(db, "employe"),{
+if (!id) { 
+  
+  if (!nom || !prenom || !email || !cin || !adresse || !numero){
+    toast.error("entrez tous les élèments");
+  }else {
+    addDoc(collection(db, "employe"),{
+      nom: state.nom,
+      prenom:state.prenom,
+      email: state.email,
+      cin: state.cin,   
+      adresse:state.adresse,
+      numero: state.numero,
+      
+    });
+   
+  
+     toast.success("employé enregistré avec succé");
+     
+  
+}} else {
+  
+ await updateDoc(doc(db, "employe",id),{
     nom: state.nom,
     prenom:state.prenom,
     email: state.email,
@@ -60,19 +80,12 @@ if (!nom || !prenom || !email || !cin || !adresse || !numero){
     numero: state.numero,
     
   });
- 
-/*  database.collection("employe").push(state, (err) =>{
-    if (err){
-      toast.error(err);
-    }else {
-      toast.success("employé enregistré avec succé");
-    }
-  });*/
-   // setTimeout(() => history.push("/users"), 500);
-   toast.success("employé enregistré avec succé");
-   
+  toast.success("modification avec succé");
+
 }
+navigate("/employe");
 } ;
+
 
   return (
     <div className="home">

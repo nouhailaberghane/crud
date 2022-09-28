@@ -35,8 +35,8 @@ const List = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you fo sur ma brudda?")) {
-    //for me the important thing is to try catch this operation, because something could go wrong when attempting to 
-    // delete a document from the database, the other stuff is just icing on the cake, not important
+      //for me the important thing is to try catch this operation, because something could go wrong when attempting to 
+      // delete a document from the database, the other stuff is just icing on the cake, not important
       try {
         //setOpen(false); also this
         await deleteDoc(doc(db, "employe", data[id].id));
@@ -76,28 +76,31 @@ const List = () => {
               </tr>
             </thead>
             <tbody>
+
               {
-                Object.keys(data).map((id, index) => {
+                // nvm u need the index here, so mapping is required, otherwise u can keep record of what index u reached and increment each time
+                // basically mapping; yeh u still need an index for the list ye list hehe nvm
+                Object.keys(data).map((id, index) => { // <--- data mapping could probably replace this with a simple for each
                   //console.log(data);
                   return (
-                    <tr key={id}>
-                      <th scope="row">{index + 1}</th>
-                      <td> {data[id].nom}</td>
-                      <td> {data[id].prenom}</td>
-                      <td> {data[id].email}</td>
-                      <td> {data[id].cin}</td>
-                      <td> {data[id].adresse}</td>
-                      <td> {data[id].numero}</td>
-                      <td>
-                        <Link to={`/update/${id}`} >
-                          <button className="btn btn-edit">modifier</button>
-                        </Link>
-                        <button className="btn btn-delete" onClick={() => { handleDelete(id) }}>supprimer</button>
+              <tr key={id}>
+                <th scope="row">{index + 1}</th>
+                <td> {data[id].nom}</td>
+                <td> {data[id].prenom}</td>
+                <td> {data[id].email}</td>
+                <td> {data[id].cin}</td>
+                <td> {data[id].adresse}</td>
+                <td> {data[id].numero}</td>
+                <td>
+                  <Link to={`/update/${data[id].id}`} >
+                    <button className="btn btn-edit">modifier</button>
+                  </Link>
+                  <button className="btn btn-delete" onClick={() => { handleDelete(id) }}>supprimer</button>
 
 
-                      </td>
-                    </tr>
-                  );
+                </td>
+              </tr>
+              );
                 })}
             </tbody>
 
