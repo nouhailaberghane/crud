@@ -1,4 +1,4 @@
-import "./nouveau.scss";
+import "./nouveauemploye.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import React, {useState, useEffect} from "react";
@@ -15,17 +15,17 @@ const initialState = {
   prenom: "",
   email:"",
   cin:"",
-  adresse:"",
+  poste:"",
   numero:""
 
 }
 
 
-const Nouveau = () => {
+const Nouveauemploye = () => {
 
 const [state, setState] = useState(initialState);
 const [data, setData] = useState({});
-const {nom, prenom ,email,cin,adresse,numero}= state;
+const {nom, prenom ,email,cin,poste,numero}= state;
 const navigate = useNavigate();
 const handleInputChange = (e) => {
       const {name, value} = e.target;
@@ -52,7 +52,7 @@ const getSingleEmploye = async () => {
 e.preventDefault();
 if (!id) { 
   
-  if (!nom || !prenom || !email || !cin || !adresse || !numero){
+  if (!nom || !prenom || !email || !cin || !poste || !numero){
     toast.error("entrez tous les élèments");
   }else {
     addDoc(collection(db, "employe"),{
@@ -60,7 +60,7 @@ if (!id) {
       prenom:state.prenom,
       email: state.email,
       cin: state.cin,   
-      adresse:state.adresse,
+      poste:state.poste,
       numero: state.numero,
       
     });
@@ -76,7 +76,7 @@ if (!id) {
     prenom:state.prenom,
     email: state.email,
     cin: state.cin,   
-    adresse:state.adresse,
+    poste:state.poste,
     numero: state.numero,
     
   });
@@ -108,8 +108,8 @@ navigate("/employe");
               <label htmlFor="nom">CIN</label>
               <input type="text" id="cin" name="cin" placeholder="CIN" value={cin} onChange={handleInputChange}/>
               
-              <label htmlFor="nom">Adresse</label>
-              <input type="text" id="adresse" name="adresse" placeholder="Adresse" value={adresse} onChange={handleInputChange}/>
+              <label htmlFor="nom">Poste</label>
+              <input type="text" id="poste" name="poste" placeholder="poste" value={poste} onChange={handleInputChange}/>
               
               <label htmlFor="nom">Numéro</label>
               <input type="number" id="numero" name="numero" placeholder="Numéro" value={numero} onChange={handleInputChange}/>
@@ -123,4 +123,4 @@ navigate("/employe");
   );
 };
 
-export default Nouveau;
+export default Nouveauemploye;

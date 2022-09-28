@@ -1,14 +1,14 @@
 import React, { useEffect, useState} from 'react';
 import {Link, useLocation} from "react-router-dom";
 import "./navbar.scss";
-const Navbar =() =>{
+const Navbarservice =() =>{
       const [ activeTab,setActiveTab] = useState("List");
       const location = useLocation();
 
       useEffect(()=> {
-          if ( location.pathname === "/empolye"){
+          if ( location.pathname === "/listeservice"){
                setActiveTab("List");
-          } else if (location.pathname === "/nouveau"){
+          } else if (location.pathname === "/nouveauservice"){
                setActiveTab("nouveau");
           }
           
@@ -19,14 +19,14 @@ const Navbar =() =>{
     <div className="header">
       <p className="logo" ></p>
       <div className="header-right"></div>
-      <Link to = "/employe">
+      <Link to = "/listeservice">
            <p className= {`${activeTab === "List" ? "active" : ""}`} onClick = {() => setActiveTab("List")}>
             Liste
            </p>
 
 
       </Link>
-      <Link to = "/nouveau">
+      <Link to = "/nouveauservice">
            <p className= {`${activeTab === "nouveau" ? "active" : ""}`} onClick = {() => setActiveTab("nouveau")}>
             nouveau
            </p>
@@ -37,4 +37,4 @@ const Navbar =() =>{
      
       </div>);
 };
-      export default Navbar;
+      export default Navbarservice;

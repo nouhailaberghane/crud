@@ -1,8 +1,8 @@
-import Home from "./pages/home/Home";
+import Home from "./pages/listestagiaire/Listestagiaire";
 import Login from "./pages/login/Login";
-import List from "./pages/list/List";
-import Single from "./pages/single/Single";
-import New from "./pages/new/New";
+import Listemploye from "./pages/listemploye/Listemploye";
+import Listeservice from "./pages/listeservice/Listeservice";
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
@@ -11,8 +11,12 @@ import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Nouveau from "./pages/nouveau/Nouveau";
-
+import Nouveauemploye from "./pages/nouveauemploye/Nouveauemploye";
+import Nouveaustagiaire from "./pages/nouveaustagiaire/Nouveaustagiaire";
+import Listestagiaire from "./pages/listestagiaire/Listestagiaire";
+import Nouveauservice from "./pages/nouveauservice/Nouveauservice";
+import Nouvelformation from "./pages/nouvelformation/Nouvelformation";
+import Listeformation from "./pages/listeformation/Listeformation";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
@@ -44,7 +48,7 @@ function App() {
                 index
                 element={
                   <RequireAuth>
-                    <List />
+                    <Listemploye />
                   </RequireAuth>
                 }
               />
@@ -53,24 +57,66 @@ function App() {
             <Route path="nouveau"
                 element={
                   <RequireAuth>
-                   <Nouveau />
+                   <Nouveauemploye />
                   </RequireAuth>
                 }
               />
-            <Route path="nouvea">
-              
-              <Route
-                path=":productId"
+            
+            
+            </Route>
+            <Route
+                path="listestagiaire"
                 element={
                   <RequireAuth>
-                    <Single />
+                    <Listestagiaire />
                   </RequireAuth>
                 }
               />
-              </Route>
-            </Route>
-            <Route path="/update/:id"  element= {<Nouveau/>}/>
-          
+              
+              <Route
+                path="nouveaustagiaire"
+                element={
+                  <RequireAuth>
+                    <Nouveaustagiaire />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="listeservice"
+                element={
+                  <RequireAuth>
+                    <Listeservice />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="nouveauservice"
+                element={
+                  <RequireAuth>
+                    <Nouveauservice />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="nouvelformation"
+                element={
+                  <RequireAuth>
+                    <Nouvelformation />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="listefomation"
+                element={
+                  <RequireAuth>
+                    <Listeformation />
+                  </RequireAuth>
+                }
+              />
+            <Route path="/update/:id"  element= {<Nouveauemploye/>}/>
+            <Route path="/updat/:id"  element= {<Nouveaustagiaire/>}/>
+            <Route path="/updateservice/:id"  element= {<Nouveauservice/>}/>
+            <Route path="/updateformation/:id"  element= {<Nouvelformation/>}/>
         </Routes>
       </BrowserRouter>
     </div>

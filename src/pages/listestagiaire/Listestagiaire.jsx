@@ -1,12 +1,13 @@
-import "./list.scss";
+import "./listestagiaire.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
+import Navbarstagiaire from "../../components/navbar/Navbarstagiaire";
 import React, { useState, useEffect, } from 'react';
 import { db } from "../../firebase";
 import { Link } from "react-router-dom";
 import { InsertPageBreakOutlined, SettingsBackupRestoreSharp, SettingsPowerRounded } from "@mui/icons-material";
 import { onSnapshot, collection, doc, deleteDoc } from "firebase/firestore";
-const List = () => {
+
+const Listestagiaire = () => {
   const [data, setData] = useState([]);
   const { nom, prenom, email, cin, adresse, numero } = data;
   //const [emp,setEmp] = useState ({});
@@ -14,7 +15,7 @@ const List = () => {
   useEffect(() => {
 
     const unsub = onSnapshot(
-      collection(db, "employe"),
+      collection(db, "stagiaire"),
       (snapshot) => {
         let list = [];
         snapshot.docs.forEach((doc) => {
@@ -39,7 +40,7 @@ const List = () => {
       // delete a document from the database, the other stuff is just icing on the cake, not important
       try {
         //setOpen(false); also this
-        await deleteDoc(doc(db, "employe", data[id].id));
+        await deleteDoc(doc(db, "stagiaire", data[id].id));
         // i belive that setUsers is the update function no?
       } catch (e) {
         console.log("U did something wrong! stacktrace: " + e);
@@ -59,7 +60,7 @@ const List = () => {
     <div className="home">
       <Sidebar />
       <div className="homeContainer">
-        <Navbar />
+        <Navbarstagiaire />
 
         <div style={{ marginTop: "100px" }}>
           <table className="styled-table">
@@ -70,7 +71,7 @@ const List = () => {
                 <th style={{ textAlign: "center" }}>Prenom</th>
                 <th style={{ textAlign: "center" }}>Email</th>
                 <th style={{ textAlign: "center" }}>CIN</th>
-                <th style={{ textAlign: "center" }}>Adresse</th>
+                <th style={{ textAlign: "center" }}>Poste</th>
                 <th style={{ textAlign: "center" }}>Numero</th>
                 <th style={{ textAlign: "center" }}>Action</th>
               </tr>
@@ -89,10 +90,10 @@ const List = () => {
                 <td> {data[id].prenom}</td>
                 <td> {data[id].email}</td>
                 <td> {data[id].cin}</td>
-                <td> {data[id].adresse}</td>
+                <td> {data[id].poste}</td>
                 <td> {data[id].numero}</td>
                 <td>
-                  <Link to={`/update/${data[id].id}`} >
+                  <Link to={`/updat/${data[id].id}`} >
                     <button className="btn btn-edit">modifier</button>
                   </Link>
                   <button className="btn btn-delete" onClick={() => { handleDelete(id) }}>supprimer</button>
@@ -117,4 +118,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default Listestagiaire;
