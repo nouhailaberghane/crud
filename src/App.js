@@ -153,7 +153,7 @@ function App() {
             <Route path="/updat/:id"  element= {<Nouveaustagiaire/>}/>
             <Route path="/updateservice/:id"  element= {<Nouveauservice/>}/>
             <Route path="/updateformation/:id"  element= {<Nouvelformation/>}/>
-            <Route path="/updateclient/:id"  element= {<Nouvelformation/>}/>
+            <Route path="/updateclient/:id"  element= {<Nouveauclient/>}/>
             <Route path="/updatefournisseur/:id"  element= {<Nouveaufournisseur/>}/>
         </Routes>
       </BrowserRouter>

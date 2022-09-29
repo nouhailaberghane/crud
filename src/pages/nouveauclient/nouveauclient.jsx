@@ -15,8 +15,9 @@ const initialState = {
   prenom: "",
   email:"",
   cin:"",
-  poste:"",
-  numero:""
+  datenaiss:"",
+  numero:"",
+  produit:""
 
 }
 
@@ -25,7 +26,7 @@ const Nouveauclient = () => {
 
 const [state, setState] = useState(initialState);
 const [data, setData] = useState({});
-const {nom, prenom ,email,cin,poste,numero}= state;
+const {nom, prenom ,email,cin,datenaiss,numero,produit}= state;
 const navigate = useNavigate();
 const handleInputChange = (e) => {
       const {name, value} = e.target;
@@ -34,10 +35,10 @@ const handleInputChange = (e) => {
 const { id } = useParams();
 
 useEffect(() => {
-  id && getSingleEmploye();
+  id && getSingleClient();
 },id) ;
 
-const getSingleEmploye = async () => {
+const getSingleClient = async () => {
   const docRef = doc(db, "client" , id);
   const snapshot = await getDoc(docRef);
   if (snapshot.exists()){
@@ -52,7 +53,7 @@ const getSingleEmploye = async () => {
 e.preventDefault();
 if (!id) { 
   
-  if (!nom || !prenom || !email || !cin || !poste || !numero){
+  if (!nom || !prenom || !email || !cin || !datenaiss || !numero || !produit){
     toast.error("entrez tous les élèments");
   }else {
     addDoc(collection(db, "client"),{
@@ -60,8 +61,9 @@ if (!id) {
       prenom:state.prenom,
       email: state.email,
       cin: state.cin,   
-      poste:state.poste,
+      datenaiss: state.datenaiss,
       numero: state.numero,
+      produit: state.produit
       
     });
    
@@ -76,8 +78,9 @@ if (!id) {
     prenom:state.prenom,
     email: state.email,
     cin: state.cin,   
-    poste:state.poste,
+    datenaiss: state.datenaiss,
     numero: state.numero,
+    produit: state.produit,
     
   });
   toast.success("modification avec succé");
@@ -108,11 +111,16 @@ navigate("/listeclient");
               <label htmlFor="nom">CIN</label>
               <input type="text" id="cin" name="cin" placeholder="CIN" value={cin} onChange={handleInputChange}/>
               
-              <label htmlFor="nom">Poste</label>
-              <input type="text" id="poste" name="poste" placeholder="poste" value={poste} onChange={handleInputChange}/>
-              
+              <label htmlFor="nom">Date de naissance   </label>
+              <input type="date" id="datenaiss" name="datenaiss" placeholder="datenaiss" value={datenaiss} onChange={handleInputChange}/>
+              <div>
+
+              </div>
               <label htmlFor="nom">Numéro</label>
               <input type="number" id="numero" name="numero" placeholder="Numéro" value={numero} onChange={handleInputChange}/>
+
+              <label htmlFor="nom">produit</label>
+              <input type="text" id="produit" name="produit" placeholder="produit" value={produit} onChange={handleInputChange}/>
               
               <input type="submit" value="Enregister"/>
               

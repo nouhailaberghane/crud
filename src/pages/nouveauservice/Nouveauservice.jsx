@@ -11,12 +11,9 @@ import { addDoc, collection,getDoc, doc , updateDoc } from "firebase/firestore";
 
 
 const initialState = {
-  nom: "",
-  prenom: "",
-  email:"",
-  cin:"",
-  poste:"",
-  numero:""
+  intitule: "",
+  prix: "",
+ 
 
 }
 
@@ -25,7 +22,7 @@ const Nouveauservice = () => {
 
 const [state, setState] = useState(initialState);
 const [data, setData] = useState({});
-const {nom, prenom ,email,cin,poste,numero}= state;
+const {intitule,prix}= state;
 const navigate = useNavigate();
 const handleInputChange = (e) => {
       const {name, value} = e.target;
@@ -52,16 +49,13 @@ const getSingleEmploye = async () => {
 e.preventDefault();
 if (!id) { 
   
-  if (!nom || !prenom || !email || !cin || !poste || !numero){
+  if (!intitule || !prix ){
     toast.error("entrez tous les élèments");
   }else {
     addDoc(collection(db, "service"),{
-      nom: state.nom,
-      prenom:state.prenom,
-      email: state.email,
-      cin: state.cin,   
-      poste:state.poste,
-      numero: state.numero,
+      intitule: state.intitule,
+      prix:state.prix,
+      
       
     });
    
@@ -72,12 +66,8 @@ if (!id) {
 }} else {
   
  await updateDoc(doc(db, "service",id),{
-    nom: state.nom,
-    prenom:state.prenom,
-    email: state.email,
-    cin: state.cin,   
-    poste:state.poste,
-    numero: state.numero,
+  intitule: state.intitule,
+  prix:state.prix
     
   });
   toast.success("modification avec succé");
@@ -96,24 +86,13 @@ navigate("/listeservice");
             <form  style={{ margin: "auto", padding:"15px", maxWidth: "400px", alignContent: "center",}}
              onSubmit={handleSubmit}>
 
-              <label htmlFor="nom">Nom</label>
-              <input type="text" id="nom" name="nom" placeholder="nom" value={nom} onChange={handleInputChange}/>
+              <label htmlFor="nom"> intitule </label>
+              <input type="text" id="nom" name="intitule" placeholder="intitule" value={intitule} onChange={handleInputChange}/>
 
-              <label htmlFor="nom">Prénom</label>
-              <input type="text" id="prenom" name="prenom" placeholder="prénom" value={prenom} onChange={handleInputChange}/>
+              <label htmlFor="nom">Prix</label>
+              <input type="text" id="prix" name="prix" placeholder="prix" value={prix} onChange={handleInputChange}/>
 
-              <label htmlFor="nom">Email</label>
-              <input type="email" id="email" name="email" placeholder="email" value={email} onChange={handleInputChange}/>
-              
-              <label htmlFor="nom">CIN</label>
-              <input type="text" id="cin" name="cin" placeholder="CIN" value={cin} onChange={handleInputChange}/>
-              
-              <label htmlFor="nom">Poste</label>
-              <input type="text" id="poste" name="poste" placeholder="poste" value={poste} onChange={handleInputChange}/>
-              
-              <label htmlFor="nom">Numéro</label>
-              <input type="number" id="numero" name="numero" placeholder="Numéro" value={numero} onChange={handleInputChange}/>
-              
+             
               <input type="submit" value="Enregister"/>
               
              </form>

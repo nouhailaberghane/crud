@@ -9,8 +9,7 @@ import { onSnapshot, collection, doc, deleteDoc } from "firebase/firestore";
 const Listemploye = () => {
   const [data, setData] = useState([]);
   const { nom, prenom, email, cin, adresse, numero } = data;
-  //const [emp,setEmp] = useState ({});
-  //const [ep,setEp] = useState ([]);
+ 
   useEffect(() => {
 
     const unsub = onSnapshot(
@@ -34,19 +33,18 @@ const Listemploye = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you fo sur ma brudda?")) {
-      //for me the important thing is to try catch this operation, because something could go wrong when attempting to 
-      // delete a document from the database, the other stuff is just icing on the cake, not important
+    if (window.confirm("vous êtes sûre?")) {
+     
       try {
-        //setOpen(false); also this
+     
         await deleteDoc(doc(db, "employe", data[id].id));
-        // i belive that setUsers is the update function no?
+      
       } catch (e) {
         console.log("U did something wrong! stacktrace: " + e);
       }
     }
 
-    // setEp(ep.filter((emp) => emp.id !== id));
+    
 
   };
 
@@ -78,10 +76,8 @@ const Listemploye = () => {
             <tbody>
 
               {
-                // nvm u need the index here, so mapping is required, otherwise u can keep record of what index u reached and increment each time
-                // basically mapping; yeh u still need an index for the list ye list hehe nvm
-                Object.keys(data).map((id, index) => { // <--- data mapping could probably replace this with a simple for each
-                  //console.log(data);
+                
+                Object.keys(data).map((id, index) => { 
                   return (
               <tr key={id}>
                 <th scope="row">{index + 1}</th>

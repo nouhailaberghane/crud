@@ -8,7 +8,7 @@ import { InsertPageBreakOutlined, SettingsBackupRestoreSharp, SettingsPowerRound
 import { onSnapshot, collection, doc, deleteDoc } from "firebase/firestore";
 const Listeformation = () => {
   const [data, setData] = useState([]);
-  const { nom, prenom, email, cin, adresse, numero } = data;
+  
   
   useEffect(() => {
 
@@ -33,7 +33,7 @@ const Listeformation = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you fo sur ma brudda?")) {
+    if (window.confirm("vous êtes sûre?")) {
      
       try {
        
@@ -68,18 +68,17 @@ const Listeformation = () => {
                 <th style={{ textAlign: "center" }}>Prenom</th>
                 <th style={{ textAlign: "center" }}>Email</th>
                 <th style={{ textAlign: "center" }}>CIN</th>
-                <th style={{ textAlign: "center" }}>Poste</th>
+                <th style={{ textAlign: "center" }}>date de naiss.</th>
                 <th style={{ textAlign: "center" }}>Numero</th>
+                <th style={{ textAlign: "center" }}>produit</th>
                 <th style={{ textAlign: "center" }}>Action</th>
               </tr>
             </thead>
             <tbody>
 
               {
-                // nvm u need the index here, so mapping is required, otherwise u can keep record of what index u reached and increment each time
-                // basically mapping; yeh u still need an index for the list ye list hehe nvm
-                Object.keys(data).map((id, index) => { // <--- data mapping could probably replace this with a simple for each
-                  //console.log(data);
+                
+                Object.keys(data).map((id, index) => { 
                   return (
               <tr key={id}>
                 <th scope="row">{index + 1}</th>
@@ -87,8 +86,9 @@ const Listeformation = () => {
                 <td> {data[id].prenom}</td>
                 <td> {data[id].email}</td>
                 <td> {data[id].cin}</td>
-                <td> {data[id].poste}</td>
+                <td> {data[id].datenaiss}</td>
                 <td> {data[id].numero}</td>
+                <td> {data[id].produit}</td>
                 <td>
                   <Link to={`/updateclient/${data[id].id}`} >
                     <button className="btn btn-edit">modifier</button>
