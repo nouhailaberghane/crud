@@ -54,10 +54,23 @@ const Sidebar = () => {
               <span>Service</span>
             </li>
           </Link>
-          <Link to="/listefomation" style={{ textDecoration: "none" }}>
+          <Link to="/listeformation" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
               <span>Formation</span>
+            </li>
+          </Link>
+          <p className="title">-----------------------------------------</p>
+          <Link to="/listeclient" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonOutlineIcon className="icon" />
+              <span>Client</span>
+            </li>
+          </Link>
+          <Link to="/listefournisseur" style={{ textDecoration: "none" }}>
+            <li>
+              <StoreIcon className="icon" />
+              <span>Fournisseur</span>
             </li>
           </Link>
           

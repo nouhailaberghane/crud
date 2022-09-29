@@ -17,6 +17,10 @@ import Listestagiaire from "./pages/listestagiaire/Listestagiaire";
 import Nouveauservice from "./pages/nouveauservice/Nouveauservice";
 import Nouvelformation from "./pages/nouvelformation/Nouvelformation";
 import Listeformation from "./pages/listeformation/Listeformation";
+import Listeclient from "./pages/listeclient/Listeclient";
+import Nouveauclient from "./pages/nouveauclient/nouveauclient";
+import Nouveaufournisseur from "./pages/nouveaufournisseur/Nouveaufournisseur";
+import Listefournisseur from "./pages/listefournisseur/Listefournisseur";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
@@ -106,10 +110,42 @@ function App() {
                 }
               />
               <Route
-                path="listefomation"
+                path="listeformation"
                 element={
                   <RequireAuth>
                     <Listeformation />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="listeclient"
+                element={
+                  <RequireAuth>
+                    <Listeclient />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="nouveauclient"
+                element={
+                  <RequireAuth>
+                    <Nouveauclient />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="nouveaufournisseur"
+                element={
+                  <RequireAuth>
+                    <Nouveaufournisseur />
+                  </RequireAuth>
+                }
+              />
+              <Route
+                path="listefournisseur"
+                element={
+                  <RequireAuth>
+                    <Listefournisseur />
                   </RequireAuth>
                 }
               />
@@ -117,6 +153,8 @@ function App() {
             <Route path="/updat/:id"  element= {<Nouveaustagiaire/>}/>
             <Route path="/updateservice/:id"  element= {<Nouveauservice/>}/>
             <Route path="/updateformation/:id"  element= {<Nouvelformation/>}/>
+            <Route path="/updateclient/:id"  element= {<Nouvelformation/>}/>
+            <Route path="/updatefournisseur/:id"  element= {<Nouveaufournisseur/>}/>
         </Routes>
       </BrowserRouter>
     </div>

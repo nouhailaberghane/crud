@@ -1,14 +1,14 @@
 import React, { useEffect, useState} from 'react';
 import {Link, useLocation} from "react-router-dom";
 import "./navbar.scss";
-const Navbarformation =() =>{
+const Navbarfournisseur =() =>{
       const [ activeTab,setActiveTab] = useState("List");
       const location = useLocation();
 
       useEffect(()=> {
-          if ( location.pathname === "/listeformation"){
+          if ( location.pathname === "/listefournisseur"){
                setActiveTab("List");
-          } else if (location.pathname === "/nouvelformation"){
+          } else if (location.pathname === "/nouveaufournisseur"){
                setActiveTab("nouveau");
           }
           
@@ -19,14 +19,14 @@ const Navbarformation =() =>{
     <div className="header">
       <p className="logo" ></p>
       <div className="header-right"></div>
-      <Link to = "/listeformation">
+      <Link to = "/listefournisseur">
            <p className= {`${activeTab === "List" ? "active" : ""}`} onClick = {() => setActiveTab("List")}>
             Liste
            </p>
 
 
       </Link>
-      <Link to = "/nouvelformation">
+      <Link to = "/nouveaufournisseur">
            <p className= {`${activeTab === "nouveau" ? "active" : ""}`} onClick = {() => setActiveTab("nouveau")}>
             nouveau
            </p>
@@ -37,4 +37,4 @@ const Navbarformation =() =>{
      
       </div>);
 };
-      export default Navbarformation;
+      export default Navbarfournisseur;
